@@ -1,0 +1,25 @@
+application:
+  name: backend
+  version: 1
+
+  db:
+    host: myhost
+    port: 3123
+    name: mydb
+    user:
+      login: ???
+      password: ???
+
+  logger:
+    level: info
+    development: false
+    encoding: json
+    outputPaths: [ "stdout", "logs/app.log" ]
+    errorOutputPaths: [ "stderr" ]
+    encoderConfig:
+      timeKey: ts
+      levelKey: level
+      messageKey: msg
+      timeEncoder: iso8601
+      levelEncoder: lowercase
+      callerEncoder: none
