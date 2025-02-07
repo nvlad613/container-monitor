@@ -1,0 +1,5 @@
+url: jdbc:postgresql://host:port/db-name
+username: admin
+password: 123456
+driver: org.postgresql.Driver
+changeLogFile: migrations/master.xml

@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "54320:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  liquibase:
+    build: ./liquibase
+    depends_on:
+      - postgres
+    volumes:
+      - ./liquibase/migrations:/liquibase/migrations
+
+volumes:
+  pgdata:

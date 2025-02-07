@@ -4,6 +4,7 @@ tasks:
   build:
     desc: Build the application
     cmds:
+      - go mod tidy
       - mkdir -p ./build/app ./build/app/logs
       - go build -o ./build/app/backend ./cmd/app/main.go
       - cp ./config/*.yml ./build/app/
