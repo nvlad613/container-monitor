@@ -2,10 +2,16 @@ application:
   name: backend
   version: 1
 
+  server:
+    port: 3000
+    idle-timeout: 5
+    shutdown-timeout: 3
+
   db:
-    host: myhost
-    port: 3123
-    name: mydb
+    host: localhost
+    port: 54320
+    name: test
+    tls-enabled: false
     user:
       login: ???
       password: ???
