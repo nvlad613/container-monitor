@@ -31,6 +31,7 @@ func main() {
 
 	// Init package structures
 	db := lo.Must(infra.InitDb(conf.Database))
+	defer db.Close()
 	validation := validator.New(validator.WithRequiredStructEnabled())
 
 	// Init repository
@@ -43,7 +44,7 @@ func main() {
 	server.StartAsync()
 
 	logger.Info("Service started!")
-	waitInterrupt()
+	WaitInterrupt()
 
 	logger.Info("Gracefully shutting down...")
 	if err := server.Shutdown(); err != nil {
@@ -53,7 +54,7 @@ func main() {
 	logger.Info("Server shutdown")
 }
 
-func waitInterrupt() {
+func WaitInterrupt() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	<-c

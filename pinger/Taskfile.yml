@@ -1,0 +1,27 @@
+version: "3"
+
+tasks:
+  build:
+    desc: Build the application
+    cmds:
+      - go mod tidy
+      - mkdir -p ./build/app ./build/app/logs
+      - go build -o ./build/app/pinger ./cmd/app/main.go
+      - cp ./config/*.yml ./build/app/
+
+  run:
+    desc: Run the application
+    deps:
+      - build
+    cmds:
+      - cd build/app && ./pinger
+
+  clear:
+    desc: Clear build files
+    cmds:
+      - rm -rf ./build/**
+
+  test:
+    desc: Run tests
+    cmds:
+      - go test -v ./**

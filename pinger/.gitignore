@@ -1,0 +1,5 @@
+build/**
+config/local.yml
+*.properties
+
+.idea/**
