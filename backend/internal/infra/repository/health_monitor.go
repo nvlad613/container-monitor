@@ -93,6 +93,7 @@ func (r *HealthMonitorRepositoryImpl) InsertActiveSnapshotAndUpdateContainer(rep
 		On("CONFLICT (docker_id) DO UPDATE").
 		Set("status = EXCLUDED.status").
 		Set("last_check = EXCLUDED.last_check").
+		Set("ip_addr = EXCLUDED.ip_addr").
 		Set("last_active = EXCLUDED.last_active").
 		Returning("id, status, last_check as timestamp")
 

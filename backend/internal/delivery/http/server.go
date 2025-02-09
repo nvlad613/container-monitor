@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/contrib/fiberzap/v2"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"go.uber.org/zap"
 	"time"
 )
@@ -37,6 +38,7 @@ func NewServer(
 	}
 
 	// Middleware
+	server.inner.Use(cors.New())
 	server.inner.Use(fiberzap.New(fiberzap.Config{
 		Logger: logger,
 	}))

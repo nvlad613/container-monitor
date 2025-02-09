@@ -23,6 +23,7 @@ func (entity Container) ToModel() health_monitor.Container {
 	return health_monitor.Container{
 		Name:         entity.Name,
 		Id:           entity.Id,
+		DockerId:     entity.DockerId,
 		IpAddr:       entity.IpAddr,
 		Status:       container_status.ContainerStatus(entity.Status),
 		LastCheck:    entity.LastCheck,

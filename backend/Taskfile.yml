@@ -5,9 +5,10 @@ tasks:
     desc: Build the application
     cmds:
       - go mod tidy
-      - mkdir -p ./build/app ./build/app/logs
+      - mkdir -p ./build/app ./build/app/logs ./build/docs
       - go build -o ./build/app/backend ./cmd/app/main.go
       - cp ./config/*.yml ./build/app/
+      - swag init -o build/docs -d cmd/app,internal/delivery,internal/domain
 
   run:
     desc: Run the application

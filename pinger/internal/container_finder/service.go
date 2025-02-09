@@ -35,7 +35,9 @@ func New(
 }
 
 func (f *FinderImpl) ContainersList(ctx context.Context) ([]Container, error) {
-	containers, err := f.dockerClient.ContainerList(ctx, container.ListOptions{})
+	containers, err := f.dockerClient.ContainerList(ctx, container.ListOptions{
+		All: true,
+	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to get list of containers: %w", err)
 	}
@@ -64,15 +66,19 @@ func (f *FinderImpl) ContainersList(ctx context.Context) ([]Container, error) {
 
 			// Checking mapped ports
 			if ip, port, err = extractPortBinding(&inspect); err != nil {
-				f.logger.Errorw("failed to get container address: "+err.Error(),
+				f.logger.Warnw("failed to get container address: "+err.Error(),
 					"id", cnt.ID, "name", cntName)
-				continue
+
+				ip = "0.0.0.0"
+				port = "0"
 			}
 		} else {
 			if port, err = extractExposedPort(&inspect); err != nil {
-				f.logger.Errorw("failed to get container address: "+err.Error(),
+				f.logger.Warnw("failed to get container address: "+err.Error(),
 					"id", cnt.ID, "name", cntName)
-				continue
+
+				ip = "0.0.0.0"
+				port = "0"
 			}
 		}
 

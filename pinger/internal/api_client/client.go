@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	apiRequestPath = "/container/health"
+	apiRequestPath = "container/health"
 )
 
 type ApiClient interface {

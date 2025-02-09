@@ -8,17 +8,11 @@ import (
 type Container struct {
 	Name         string
 	Id           int
+	DockerId     string
 	IpAddr       string
 	Status       container_status.ContainerStatus
 	LastCheck    time.Time
 	LastActivity time.Time
-}
-
-type HealthReport struct {
-	Name     string
-	DockerId string
-	IpAddr   string
-	Health   HealthSnapshot
 }
 
 type HealthLog struct {
@@ -26,6 +20,13 @@ type HealthLog struct {
 	FromDate    time.Time
 	ToDate      time.Time
 	Log         []HealthSnapshot
+}
+
+type HealthReport struct {
+	Name     string
+	DockerId string
+	IpAddr   string
+	Health   HealthSnapshot
 }
 
 type HealthSnapshot struct {

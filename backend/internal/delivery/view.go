@@ -10,16 +10,18 @@ import (
 type ContainerView struct {
 	Name         string                           `json:"name"`
 	Id           int                              `json:"id"`
+	DockerId     string                           `json:"dockerId"`
 	IpAddr       string                           `json:"ip"`
 	Status       container_status.ContainerStatus `json:"status"`
-	LastCheck    time.Time                        `json:"last_check"`
-	LastActivity time.Time                        `json:"last_activity"`
+	LastCheck    time.Time                        `json:"lastCheck"`
+	LastActivity time.Time                        `json:"lastActivity"`
 }
 
 func (view *ContainerView) FromModel(model health_monitor.Container) ContainerView {
 	*view = ContainerView{
 		Name:         model.Name,
 		Id:           model.Id,
+		DockerId:     model.DockerId,
 		IpAddr:       model.IpAddr,
 		Status:       model.Status,
 		LastCheck:    model.LastCheck,
@@ -33,6 +35,7 @@ type ContainerHealthReportView struct {
 	Name     string         `json:"name" validate:"required,max=64"`
 	DockerId string         `json:"docker_id" validate:"required,len=64"`
 	IpAddr   string         `json:"ip" validate:"required,ipv4"`
+	Port     string         `json:"port" validate:"required,number"`
 	Health   HealthSnapshot `json:"health_report" validate:"required"`
 }
 
