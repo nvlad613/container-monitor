@@ -15,9 +15,10 @@ type Config struct {
 }
 
 type ServerParams struct {
-	Port               int `koanf:"port"`
-	IdleTimeoutSec     int `koanf:"idle-timeout"`
-	ShutdownTimeoutSec int `koanf:"shutdown-timeout"`
+	Hostname           string `koanf:"host"`
+	Port               int    `koanf:"port"`
+	IdleTimeoutSec     int    `koanf:"idle-timeout"`
+	ShutdownTimeoutSec int    `koanf:"shutdown-timeout"`
 }
 
 type DatabaseConnection struct {

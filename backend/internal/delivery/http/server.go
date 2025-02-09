@@ -54,7 +54,7 @@ func NewServer(
 
 func (s *Server) StartAsync() {
 	go func() {
-		addr := fmt.Sprintf(":%d", s.config.Port)
+		addr := fmt.Sprintf("%s:%d", s.config.Hostname, s.config.Port)
 		if err := s.inner.Listen(addr); err != nil {
 			s.logger.Fatal(err)
 			panic(err)

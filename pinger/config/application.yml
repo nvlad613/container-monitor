@@ -11,7 +11,7 @@ application:
     host: "unix:///var/run/docker.sock"
 
   consumer-server:
-    host: "http://localhost:3300/api/v1"
+    host: "http://nginx:80/api/v1"
     max-retries: 5
 
   logger:

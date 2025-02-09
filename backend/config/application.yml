@@ -3,18 +3,19 @@ application:
   version: 1
 
   server:
-    port: 3300
+    host: backend
+    port: 8080
     idle-timeout: 5
     shutdown-timeout: 3
 
   db:
-    host: localhost
-    port: 54320
-    name: test
+    host: postgres
+    port: 5432
+    name: appdb
     tls-enabled: false
     user:
-      login: ???
-      password: ???
+      login: appuser
+      password: apppass
 
   logger:
     level: info
