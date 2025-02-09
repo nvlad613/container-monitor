@@ -11,7 +11,6 @@ FROM alpine:latest
 RUN apk --no-cache add docker-cli
 WORKDIR /app
 
-# Копируем бинарник и конфиг
 COPY --from=build /app/pinger /app/pinger
 COPY --from=build /app/config/application.yml /app/
 

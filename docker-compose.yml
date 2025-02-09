@@ -13,7 +13,8 @@ services:
     networks:
       - app-network
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   pinger:
     build: ./pinger
@@ -33,6 +34,11 @@ services:
       POSTGRES_USER: appuser
       POSTGRES_PASSWORD: apppass
       POSTGRES_DB: appdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d appdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -41,11 +47,10 @@ services:
       - "5432:5432"
 
   liquibase:
-    build:
-      context: ./backend
-      dockerfile: cmd/liquibase/Dockerfile
+    build: ./backend/cmd/liquibase
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - app-network
 
